@@ -25,16 +25,6 @@ DB_PASSWORD=password
 
 ---
 
-## Give permissions for storage folder & add link
-
-```bash
-cd src/
-php artisan storage:link
-sudo chmod -R o+w ./storage
-```
-
----
-
 ## Login to docker-registry.univ-nantes.fr
 
 ```bash
@@ -51,15 +41,7 @@ podman network create laragigs_network
 
 ---
 
-## Build & Run MySQL server container
-
-• Build & Deploy
-
-```bash
-cd laragigs/
-podman image build --tag laragigs:mysql ./containers/mysql/
-podman image push localhost/laragigs:mysql docker-registry.univ-nantes.fr/e191350p/laragigs:mysql
-```
+## Run MySQL server container
 
 • Run
 
@@ -67,26 +49,17 @@ podman image push localhost/laragigs:mysql docker-registry.univ-nantes.fr/e19135
 podman run -d \
  --name laragigs_mysql \
  --network laragigs_network \
- -v <path to mysql data folder>:/var/lib/mysql \
  -e MYSQL_ROOT_PASSWORD=root \
  -e MYSQL_DATABASE=laragigs \
  -e MYSQL_USER=user \
  -e MYSQL_PASSWORD=password \
  --userns=keep-id \
-  docker-registry.univ-nantes.fr/e191350p/laragigs:mysql
+  mysql:latest
 ```
 
 ---
 
-## Build & Run phpmyadmin container
-
-• Build & Deploy
-
-```bash
-cd laragigs/
-podman image build --tag laragigs:phpmyadmin ./containers/phpmyadmin/
-podman image push localhost/laragigs:phpmyadmin docker-registry.univ-nantes.fr/e191350p/laragigs:phpmyadmin
-```
+## Run phpmyadmin container
 
 • Run
 
@@ -100,7 +73,15 @@ podman run -d \
   -e MYSQL_PASSWORD=password \
   -e MYSQL_ROOT_PASSWORD=root \
   -p 8141:80 \
-  docker-registry.univ-nantes.fr/e191350p/laragigs:phpmyadmin
+  phpmyadmin/phpmyadmin
+```
+
+---
+
+## Create a commun volume to share project files between php & nginx containers
+
+```bash
+podman volume create laragigs_volume
 ```
 
 ---
@@ -111,7 +92,7 @@ podman run -d \
 
 ```bash
 cd laragigs/
-podman image build --tag laragigs:php ./containers/php/
+podman image build --tag laragigs:php -f PHPContainerfile .
 podman image push localhost/laragigs:php docker-registry.univ-nantes.fr/e191350p/laragigs:php
 ```
 
@@ -121,7 +102,7 @@ podman image push localhost/laragigs:php docker-registry.univ-nantes.fr/e191350p
 podman run -d \
   --name laragigs_php \
   --network laragigs_network \
-  -v <path to laravel project>:/var/www/html \
+  -v laragigs_volume:/var/www/html \
   docker-registry.univ-nantes.fr/e191350p/laragigs:php
 ```
 
@@ -133,7 +114,7 @@ podman run -d \
 
 ```bash
 cd laragigs/
-podman image build --tag laragigs:nginx ./containers/nginx/
+podman image build --tag laragigs:nginx -f NginxContainerfile .
 podman image push localhost/laragigs:nginx docker-registry.univ-nantes.fr/e191350p/laragigs:nginx
 ```
 
@@ -143,9 +124,18 @@ podman image push localhost/laragigs:nginx docker-registry.univ-nantes.fr/e19135
 podman run -d \
   --name laragigs_nginx \
   --network laragigs_network \
-  -v <path to laravel project>:/var/www/html \
+  -v laragigs_volume:/var/www/html \
   -p 8140:80 \
   docker-registry.univ-nantes.fr/e191350p/laragigs:nginx
+```
+
+---
+
+## Give permissions for storage folder & add link
+
+```bash
+podman exec laragigs_php php /var/www/html/artisan storage:link
+podman exec laragigs_php chown -R www-data:www-data /var/www/html/storage
 ```
 
 ---
@@ -159,10 +149,17 @@ podman exec laragigs_php php /var/www/html/artisan migrate --seed
 ---
 
 **_Note_**
+
+migrate command to create tables is the DB.
+to refresh the tables and remove all data, we can add :refresh to migrate -> migrate:refresh
+migrate:refresh is equivalent to DROP and CREATE in SQL
+
 --seed option is to make some fake data
 
 When adding this option, a user called "Salim" with email "salim@gmail.com" and password "123" will be created, as well as 20 fake job posts.
 
 You can run this command with --seed option only the first time, beacuse if you run it again you will have an error "create user already existe in the DB".
+
+Important: make sure that you run all commands above in order before trying the app.
 
 ---
