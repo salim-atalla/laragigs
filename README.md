@@ -25,6 +25,16 @@ DB_PASSWORD=password
 
 ---
 
+## Give permissions for storage folder & add link
+
+```bash
+cd src/
+php artisan storage:link
+sudo chmod -R o+w ./storage
+```
+
+---
+
 ## Login to docker-registry.univ-nantes.fr
 
 ```bash
@@ -90,7 +100,7 @@ podman run -d \
   -e MYSQL_PASSWORD=password \
   -e MYSQL_ROOT_PASSWORD=root \
   -p 8141:80 \
-  docker-registry.univ-nantes.fr/e191350p/laravel:phpmyadmin
+  docker-registry.univ-nantes.fr/e191350p/laragigs:phpmyadmin
 ```
 
 ---
@@ -146,14 +156,6 @@ podman run -d \
 ```bash
 podman-compose build
 podman-compose up -d
-```
-
-## Give permissions for storage folder & add link
-
-```bash
-cd src/
-php artisan storage:link
-sudo chmod -R o+w ./storage
 ```
 
 ## Create tables in DB
