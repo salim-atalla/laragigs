@@ -150,15 +150,8 @@ podman run -d \
 
 ---
 
-## Build & Run with podman-compose
-
-```bash
-podman-compose build
-podman-compose up -d
-```
-
 ## Create tables in DB
 
 ```bash
-podman-compose exec php php /var/www/html/artisan migrate
+podman exec laragigs_php php /var/www/html/artisan migrate
 ```
