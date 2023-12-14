@@ -144,7 +144,6 @@ podman run -d \
   --name laragigs_nginx \
   --network laragigs_network \
   -v <path to laravel project>:/var/www/html \
-  -v ./nginx/default.conf:/etc/nginx/conf.d/default.conf \
   -p 8140:80 \
   docker-registry.univ-nantes.fr/e191350p/laragigs:nginx
 ```
