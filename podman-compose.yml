@@ -29,7 +29,6 @@ services:
             MYSQL_USER: user
             MYSQL_PASSWORD: password
             MYSQL_ROOT_PASSWORD: root
-            # SERVICE_TAGS: dev
             MYSQL_SERVICE_NAME: mysql
         networks:
             - laravel
