@@ -16,12 +16,17 @@ Change DB env variables to connect with mySQL DB server.
 
 where:
 
-• DB_CONNECTION=mysql
-• DB_HOST=mysql
-• DB_PORT=3306
-• DB_DATABASE=laragigs
-• DB_USERNAME=user
-• DB_PASSWORD=password
+-   DB_CONNECTION=mysql
+
+-   DB_HOST=mysql
+
+-   DB_PORT=3306
+
+-   DB_DATABASE=laragigs
+
+-   DB_USERNAME=user
+
+-   DB_PASSWORD=password
 
 ---
 
