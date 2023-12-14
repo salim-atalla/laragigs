@@ -4,7 +4,7 @@
 
 ```bash
 cd src/
-composer create-project laravel/laravel . # to create an empty laravel project, copy src files of laravel project if already have a project and ignore this command.
+composer create-project laravel/laravel . # to create an empty laravel project, or copy src files of laravel project if already have a project and ignore this command.
 composer update
 ```
 
@@ -16,12 +16,12 @@ Change DB env variables to connect with mySQL DB server.
 
 where:
 
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=laragigs
-DB_USERNAME=user
-DB_PASSWORD=password
+• DB_CONNECTION=mysql
+• DB_HOST=mysql
+• DB_PORT=3306
+• DB_DATABASE=laragigs
+• DB_USERNAME=user
+• DB_PASSWORD=password
 
 ---
 
