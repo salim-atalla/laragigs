@@ -150,16 +150,18 @@ podman exec laragigs_php php /var/www/html/artisan migrate --seed
 
 **_Note_**
 
-migrate command to create tables is the DB.
-to refresh the tables and remove all data, we can add :refresh to migrate -> migrate:refresh
-migrate:refresh is equivalent to DROP and CREATE in SQL
+-   Use the migrate command to create tables in the database.
 
---seed option is to make some fake data
+-   To remove all data and recreate tables, add :refresh to the migrate command -> migrate:refresh.
 
-When adding this option, a user called "Salim" with email "salim@gmail.com" and password "123" will be created, as well as 20 fake job posts.
+-   migrate:refresh is equivalent to DROP and CREATE in SQL.
 
-You can run this command with --seed option only the first time, beacuse if you run it again you will have an error "create user already existe in the DB".
+-   The --seed option is used to generate fake data.
 
-Important: make sure that you run all commands above in order before trying the app.
+-   When using the 'seed' option, a user named "Salim" with the email "salim@gmail.com" and password "123" will be created, along with 20 fake job posts created by "Salim".
+
+-   Run the --seed option only the first time; if run again, an error may occur ("create user already exists in the DB"). However, it can be added in case you include the refresh option in the migrate command.
+
+-   Important: Ensure that all containers are running, the virtual network is created, and the shared volume is set up before attempting to run the app.
 
 ---
