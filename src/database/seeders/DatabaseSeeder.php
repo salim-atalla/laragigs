@@ -25,10 +25,11 @@ class DatabaseSeeder extends Seeder
         */
         $user = User::factory()->create([
             'name' => 'Salim',
-            'email' => 'salim@gmail.com'
+            'email' => 'salim@gmail.com',
+            'password' => bcrypt('123')
         ]);
 
-        Listing::factory(6)->create([
+        Listing::factory(20)->create([
             'user_id' => $user->id
         ]);
         // End the sinario
@@ -56,6 +57,6 @@ class DatabaseSeeder extends Seeder
         //     'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam minima et illo reprehenderit quas possimus voluptas repudiandae cum expedita, eveniet aliquid, quam illum quaerat consequatur! Expedita ab consectetur tenetur delensiti?'
         // ]);
 
-        
+
     }
 }

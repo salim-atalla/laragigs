@@ -153,5 +153,16 @@ podman run -d \
 ## Create tables in DB
 
 ```bash
-podman exec laragigs_php php /var/www/html/artisan migrate
+podman exec laragigs_php php /var/www/html/artisan migrate --seed
 ```
+
+---
+
+**_Note_**
+--seed option is to make some fake data
+
+When adding this option, a user called "Salim" with email "salim@gmail.com" and password "123" will be created, as well as 20 fake job posts.
+
+You can run this command with --seed option only the first time, beacuse if you run it again you will have an error "create user already existe in the DB".
+
+---
