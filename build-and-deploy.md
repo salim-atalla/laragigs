@@ -41,7 +41,7 @@ Build and push the MySQL server container to the registry:
 
 ```bash
 cd laragigs/
-podman image build --tag laragigs:mysql -f MYSQLContainerfile .
+podman image build --tag laragigs:mysql -f Containerfile_mysql .
 podman image push localhost/laragigs:mysql docker-registry.univ-nantes.fr/e191350p/laragigs:mysql
 ```
 
@@ -53,7 +53,7 @@ Build and push the phpMyAdmin container:
 
 ```bash
 cd laragigs/
-podman image build --tag laragigs:phpmyadmin -f PHPMYADMINContainerfile .
+podman image build --tag laragigs:phpmyadmin -f Containerfile_phpmyadmin .
 podman image push localhost/laragigs:phpmyadmin docker-registry.univ-nantes.fr/e191350p/laragigs:phpmyadmin
 ```
 
@@ -65,7 +65,7 @@ Build and push the PHP container:
 
 ```bash
 cd laragigs/
-podman image build --tag laragigs:php -f PHPContainerfile .
+podman image build --tag laragigs:php -f Containerfile_php .
 podman image push localhost/laragigs:php docker-registry.univ-nantes.fr/e191350p/laragigs:php
 ```
 
@@ -77,7 +77,7 @@ Build and push the Nginx server container:
 
 ```bash
 cd laragigs/
-podman image build --tag laragigs:nginx -f NginxContainerfile .
+podman image build --tag laragigs:nginx -f Containerfile_nginx .
 podman image push localhost/laragigs:nginx docker-registry.univ-nantes.fr/e191350p/laragigs:nginx
 ```
 
