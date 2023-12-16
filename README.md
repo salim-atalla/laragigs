@@ -23,6 +23,6 @@ For detailed instructions on building and deploying the application, refer to th
 -   [build-and-deploy.md](build-and-deploy.md) for deployment instructions.
 -   [commands.md](commands.md) for the necessary commands to execute the containers.
 
-## Container's Diagram
+## Containers Diagram
 
-![Container's Diagram](./diagram.png)
+![Containers Diagram](./diagram.png)
