@@ -11,7 +11,7 @@ Laragigs is a web application built with Laravel for managing job posts. The app
 
 ## Deployment
 
-Laragigs can be deployed using Docker containers. The provided containers include:
+Laragigs can be deployed using containers. The provided containers include:
 
 -   MySQL: Database storage for the application.
 -   PHPMyAdmin: Web-based database management tool.
